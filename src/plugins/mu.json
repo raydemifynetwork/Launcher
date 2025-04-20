@@ -1,0 +1,15 @@
+{
+  "id": "mu",
+  "name": "Mu Online",
+  "install": {
+    "url": "https://seu-cdn.com/mu/1.0.0/mu.zip",
+    "version": "1.0.0"
+  },
+  "update": {
+    "url": "https://seu-cdn.com/mu/patches/1.0.1.zip",
+    "version": "1.0.1"
+  },
+  "launch": {
+    "exec": "Main.exe"
+  }
+}

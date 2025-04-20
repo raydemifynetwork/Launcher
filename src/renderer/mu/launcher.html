@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="../shared/ui.css">
+  <title>Mu Online Launcher</title>
+</head>
+<body>
+<div class="titlebar">
+  <button class="win-btn minimize">—</button>
+  <button class="win-btn close">×</button>
+</div>
+
+<div class="grid-container">
+  <!-- Header reduzido -->
+  <header class="grid-header">
+    <button class="nav-toggle">≡</button>
+    <h1>Mu Online</h1>
+  </header>
+
+  <!-- Navegação lateral -->
+  <nav class="grid-nav">
+    <button data-act="play">
+      <i class="material-icons">play_arrow</i>
+      <span>Jogar</span>
+    </button>
+    <button data-act="update">
+      <i class="material-icons">system_update</i>
+      <span>Atualizar</span>
+    </button>
+    <button data-act="account">
+      <i class="material-icons">person</i>
+      <span>Conta</span>
+    </button>
+    <button data-act="wiki">
+      <i class="material-icons">menu_book</i>
+      <span>Wiki</span>
+    </button>
+    <button data-act="config">
+      <i class="material-icons">settings</i>
+      <span>Configurações</span>
+    </button>
+  </nav>
+
+
+  <!-- Carrossel de banners -->
+  <section class="grid-hero">
+    <div class="carousel">
+      <img src="../../assets/mu_banner.jpg" class="active">
+    </div>
+    <div class="carousel-indicators">
+      <span data-slide="0" class="active"></span>
+      <span data-slide="1"></span>
+      <span data-slide="2"></span>
+    </div>
+
+  </section>
+
+  <!-- Sidebar de info -->
+  <aside class="grid-info">
+    <div class="info-card">
+      <h3>Servidor</h3>
+      <p>Online: ✅</p>
+      <p>Players: 123/500</p>
+    </div>
+    <div class="info-card">
+      <h3>Próximo Evento</h3>
+      <p>Dragão de Fogo em 2h</p>
+    </div>
+  </aside>
+
+  <!-- Ticker de notícias -->
+  <footer class="grid-news-ticker">
+    <div class="ticker">
+      <span>🎉 XP em dobro neste fim de semana!    Nova dungeon em Kanturu!    Sistema de clãs reativado!  </span>
+    </div>
+  </footer>
+</div>
+<footer class="grid-footer">
+  <div class="footer-left">
+    <button id="btn-play-footer">
+      <i class="material-icons">play_arrow</i>
+      <span>Jogar</span>
+    </button>
+    <button id="btn-update-footer" hidden>
+      <i class="material-icons">system_update</i>
+      <span>Atualizando…</span>
+    </button>
+  </div>
+  <div class="footer-right">
+    <div class="version-info">v1.0.1</div>
+    <div class="progress-bar-container">
+      <div class="progress-bar" style="width: 0%;"></div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="launcher.js"></script>
+</body>
+
+
+
+</html>
