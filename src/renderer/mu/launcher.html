@@ -1,105 +1,339 @@
-<!doctype html>
-<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="../shared/ui.css">
-  <title>Mu Online Launcher</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mu Online Launcher</title>
+
+  <!-- CSS principal -->
+  <link rel="stylesheet" href="launcher.css" />
+
+  <!-- Material Icons (outlined) -->
+  <link
+          href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+          rel="stylesheet"
+  />
+
+  <!-- Pequeno ajuste só para a logo na sidebar -->
+  <style>
+    .logo-box{
+      width:100%;
+      padding:4px 4px 12px;
+    }
+    .logo-box img{
+      width:100%;
+      height:auto;
+      display:block;
+      object-fit:contain;
+      filter:drop-shadow(0 0 6px rgba(0,160,255,.6));
+    }
+  </style>
 </head>
 <body>
-<div class="titlebar">
-  <button class="win-btn minimize">—</button>
-  <button class="win-btn close">×</button>
-</div>
+<div class="launcher-container">
+  <div class="main-area">
+    <!-- === SIDEBAR ESQUERDA =================================== -->
+    <nav class="sidebar-left">
+      <!-- LOGO ------------------------------------------------- -->
+      <div class="logo-box">
+        <!-- MuLogo.png está na MESMA pasta do banner da notícia 2 -->
+        <img src="../../assets/MuLogo.png" alt="MU RFN Logo" />
+      </div>
 
-<div class="grid-container">
-  <!-- Header reduzido -->
-  <header class="grid-header">
-    <button class="nav-toggle">≡</button>
-    <h1>Mu Online</h1>
-  </header>
+      <ul class="menu-list">
+        <li class="menu-item active">
+          <a href="#" class="menu-link">
+            <span class="material-icons-outlined menu-icon">play_arrow</span>
+            <span class="menu-text">Jogar</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="#" class="menu-link">
+            <span class="material-icons-outlined menu-icon">person</span>
+            <span class="menu-text">Conta</span>
+          </a>
+        </li>
+        <!-- launcher.html -->
+        <li class="menu-item wiki">
+          <a href="#" class="menu-link"
+             onclick="console.log('[renderer] clicou em Wiki'); window.windowControls.navigate('wiki.html'); return false;">
+            <span class="material-icons-outlined menu-icon">menu_book</span>
+            <span class="menu-text">Wiki</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="#" class="menu-link">
+            <span class="material-icons-outlined menu-icon">settings</span>
+            <span class="menu-text">Configurações</span>
+          </a>
+        </li>
+      </ul>
 
-  <!-- Navegação lateral -->
-  <nav class="grid-nav">
-    <button data-act="play">
-      <i class="material-icons">play_arrow</i>
-      <span>Jogar</span>
-    </button>
-    <button data-act="update">
-      <i class="material-icons">system_update</i>
-      <span>Atualizar</span>
-    </button>
-    <button data-act="account">
-      <i class="material-icons">person</i>
-      <span>Conta</span>
-    </button>
-    <button data-act="wiki">
-      <i class="material-icons">menu_book</i>
-      <span>Wiki</span>
-    </button>
-    <button data-act="config">
-      <i class="material-icons">settings</i>
-      <span>Configurações</span>
-    </button>
-  </nav>
+      <!-- Blocos de redes sociais -->
+      <div class="sidebar-social">
+        <!-- Twitch -->
+        <a href="https://twitch.tv/seu_canal" class="social-btn"
+           data-tip="Twitch" target="_blank" rel="noopener">
+          <svg viewBox="0 0 512 512"><path d="M80 32L32 96v320h128v64h64l64-64h96l128-128V32H80zm352 256l-64 64h-96l-64 64v-64H128V64h304v224z"/><path d="M320 128h48v128h-48zM224 128h48v128h-48z"/></svg>
+        </a>
 
+        <!-- WhatsApp -->
+        <a href="https://wa.me/seu_numero" class="social-btn"
+           data-tip="WhatsApp" target="_blank" rel="noopener">
+          <svg viewBox="0 0 512 512"><path d="M256.1 67.5c-103.2 0-187 83.8-187 187 0 32.9 8.6 65.1 24.9 93.3L67 445l100.9-26.5c27.4 14.9 58.2 22.7 88.2 22.7h.1c103.2 0 187-83.8 187-187s-83.8-186.8-187.1-186.8zm0 341.5c-27.6 0-54.8-7.3-78.6-21.1l-5.6-3.3-59.9 15.7 16-58.4-3.7-6c-16.2-26.1-24.9-56.2-24.9-87 0-91.3 74.3-165.5 165.6-165.5 91.2 0 165.5 74.2 165.5 165.5S347.3 409 256.1 409zm90.5-122.2c-4.9-2.5-29-14.3-33.5-15.9-4.5-1.7-7.8-2.5-11.1 2.5-3.3 4.9-12.7 15.9-15.6 19.1-2.8 3.3-5.8 3.7-10.7 1.2s-20.8-7.7-39.6-24.5c-14.6-13-24.5-29.1-27.3-34-2.8-4.9-.3-7.4 2.1-9.9 2.2-2.2 4.9-5.8 7.4-8.6 2.5-2.8 3.3-4.9 5-8.2 1.7-3.3.8-6.2-.4-8.6-1.2-2.5-11-26.4-15.1-36.3-4-9.6-8-8.3-11.1-8.4-2.8-.2-6.2-.2-9.6-.2s-8.6 1.2-13.1 6.2c-4.5 4.9-17.2 16.8-17.2 40.9s17.6 47.4 20 50.7c2.5 3.3 34.7 53 84.3 74.3 11.8 5.1 21 8.1 28.2 10.4 11.8 3.7 22.5 3.2 31 1.9 9.5-1.4 29.6-12.1 33.8-23.8 4.2-11.6 4.2-21.4 2.9-23.8-1.2-2.5-4.4-3.7-9.3-6.2z"/></svg>
+        </a>
 
-  <!-- Carrossel de banners -->
-  <section class="grid-hero">
-    <div class="carousel">
-      <img src="../../assets/mu_banner.jpg" class="active">
+        <!-- Discord -->
+        <a href="https://discord.gg/seu_link" class="social-btn"
+           data-tip="Discord" target="_blank" rel="noopener">
+          <span class="material-icons-outlined">discord</span>
+        </a>
+
+        <!-- YouTube -->
+        <a href="https://youtube.com/seu_canal" class="social-btn"
+           data-tip="YouTube" target="_blank" rel="noopener">
+          <span class="material-icons-outlined">smart_display</span>
+        </a>
+      </div>
+
+    </nav>
+
+    <!-- === CARROSSEL CENTRAL ================================== -->
+    <main class="main-content">
+      <div class="carousel">
+        <!-- slide 1 -->
+        <div class="carousel-slide active">
+          <img
+                  src="banner1.jpg"
+                  alt="Notícia 1"
+                  class="carousel-image"
+          />
+          <div class="carousel-caption">
+            <h2 class="slide-title">Nova Temporada Lançada</h2>
+            <p class="slide-description">
+              A temporada 15 chegou com novos mapas, monstros e desafios.
+            </p>
+          </div>
+        </div>
+
+        <!-- slide 2 -->
+        <div class="carousel-slide">
+          <img
+                  src="../../assets/mu_banner.jpg"
+                  alt="Notícia 2"
+                  class="carousel-image"
+          />
+          <div class="carousel-caption">
+            <h2 class="slide-title">Evento Especial de Halloween</h2>
+            <p class="slide-description">
+              Celebre o Halloween com eventos temáticos e recompensas
+              exclusivas.
+            </p>
+          </div>
+        </div>
+
+        <!-- slide 3 -->
+        <div class="carousel-slide">
+          <img
+                  src="banner3.jpg"
+                  alt="Notícia 3"
+                  class="carousel-image"
+          />
+          <div class="carousel-caption">
+            <h2 class="slide-title">Atualização 1.2 Disponível</h2>
+            <p class="slide-description">
+              A versão 1.2 traz otimizações e correções de bugs.
+            </p>
+          </div>
+        </div>
+
+        <!-- setas -->
+        <button class="nav-arrow prev"><svg width="20" height="20" stroke="currentColor" fill="none"><polyline points="13 17 6 10 13 3"/></svg></button>
+        <button class="nav-arrow next"><svg width="20" height="20" stroke="currentColor" fill="none"><polyline points="7 17 14 10 7 3"/></svg></button>
+
+        <!-- dots -->
+        <div class="carousel-dots">
+          <span class="dot active" data-slide="0"></span>
+          <span class="dot" data-slide="1"></span>
+          <span class="dot" data-slide="2"></span>
+        </div>
+      </div>
+    </main>
+
+    <!-- === SIDEBAR DIREITA ==================================== -->
+    <aside class="sidebar-right">
+      <!-- CONTROLES DE JANELA -->
+      <div class="win-controls">
+        <button class="win-btn mini" title="Minimizar"
+                onclick="window.windowControls.minimize()">
+          <span class="material-icons-outlined">remove</span>
+        </button>
+        <button class="win-btn close" title="Fechar"
+                onclick="window.windowControls.close()">
+          <span class="material-icons-outlined">close</span>
+        </button>
+      </div>
+
+      <!-- TÍTULO DO PAINEL -->
+      <header class="info-header">
+        <h2>Eventos &amp; Informações</h2>
+      </header>
+
+      <!-- CARROSSEL VERTICAL -->
+      <div class="vertical-carousel">
+        <div class="vc-inner">
+          <div class="vc-item">Dragão de Fogo — 2 h</div>
+          <div class="vc-item">Invasão de Golem — 5 h</div>
+          <div class="vc-item">Castle Siege — 1 d 3 h</div>
+          <div class="vc-item">XP Boost — 12 h</div>
+          <div class="vc-item">XP Boost — 12 h</div>
+          <div class="vc-item">XP Boost — 12 h</div>
+          <div class="vc-item">XP Boost — 12 h</div>
+        </div>
+      </div>
+
+      <!-- STATUS DE SERVIDOR -->
+      <div class="panel-box server-status">
+        <h3>Status do Servidor</h3>
+        <p class="server-state">
+          <span class="status-indicator online"></span> Online
+        </p>
+        <p class="server-players">123 jogadores</p>
+      </div>
+    </aside>
+  </div>
+
+  <footer class="bottom-bar">
+    <button type="button" class="play-button">Jogar</button>
+
+    <div class="update-progress">
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 0%"></div>
+      </div>
+      <div class="progress-info">
+        <span class="status-text">Atualizando…</span>
+        <span class="speed-text">0 KB/s</span>
+        <span class="percent-text">0%</span>
+      </div>
     </div>
-    <div class="carousel-indicators">
-      <span data-slide="0" class="active"></span>
-      <span data-slide="1"></span>
-      <span data-slide="2"></span>
-    </div>
 
-  </section>
-
-  <!-- Sidebar de info -->
-  <aside class="grid-info">
-    <div class="info-card">
-      <h3>Servidor</h3>
-      <p>Online: ✅</p>
-      <p>Players: 123/500</p>
-    </div>
-    <div class="info-card">
-      <h3>Próximo Evento</h3>
-      <p>Dragão de Fogo em 2h</p>
-    </div>
-  </aside>
-
-  <!-- Ticker de notícias -->
-  <footer class="grid-news-ticker">
-    <div class="ticker">
-      <span>🎉 XP em dobro neste fim de semana!    Nova dungeon em Kanturu!    Sistema de clãs reativado!  </span>
+    <div class="game-version">
+      Versão instalada: <span class="version-number">1.0.0</span>
     </div>
   </footer>
+
+  </div>
+
+  <!-- === RODAPÉ ============================================== -->
+
 </div>
-<footer class="grid-footer">
-  <div class="footer-left">
-    <button id="btn-play-footer">
-      <i class="material-icons">play_arrow</i>
-      <span>Jogar</span>
-    </button>
-    <button id="btn-update-footer" hidden>
-      <i class="material-icons">system_update</i>
-      <span>Atualizando…</span>
-    </button>
-  </div>
-  <div class="footer-right">
-    <div class="version-info">v1.0.1</div>
-    <div class="progress-bar-container">
-      <div class="progress-bar" style="width: 0%;"></div>
-    </div>
-  </div>
-</footer>
+
+<!-- === JS super‑mínimo para o carrossel (troca automática) ==== -->
+<script>
+
+  let idx = 0;
+  const slides = document.querySelectorAll(".carousel-slide");
+  const dots = document.querySelectorAll(".dot");
+  function show(i) {
+    slides.forEach((s, j) => s.classList.toggle("active", i === j));
+    dots.forEach((d, j) => d.classList.toggle("active", i === j));
+    idx = i;
+  }
+  document.querySelector(".next").onclick = () =>
+          show((idx + 1) % slides.length);
+  document.querySelector(".prev").onclick = () =>
+          show((idx - 1 + slides.length) % slides.length);
+  dots.forEach((d, i) => (d.onclick = () => show(i)));
+  setInterval(() => show((idx + 1) % slides.length), 8000);
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const inner = document.querySelector(".vc-inner");
+    const items = Array.from(inner.children);
+    let shifting = false;
+
+    function slideUp() {
+      if (shifting) return;
+      shifting = true;
+
+      // anima
+      inner.style.transition = "transform 0.6s ease";
+      const step = items[0].offsetHeight + parseInt(getComputedStyle(items[0]).marginBottom);
+      inner.style.transform = `translateY(-${step}px)`;
+
+      inner.addEventListener("transitionend", onTransitionEnd, { once: true });
+    }
+
+    function onTransitionEnd() {
+      // remove transição pra reposicionar sem animação
+      inner.style.transition = "none";
+      inner.style.transform = "translateY(0)";
+
+      // move o primeiro elemento para o final
+      const first = inner.firstElementChild;
+      inner.appendChild(first);
+
+      // retira classes e reaplica destaque
+      const all = Array.from(inner.children);
+      items.length = 0;
+      all.forEach(n => items.push(n));
+
+      updateClasses();
+
+      // libera próximo slide
+      requestAnimationFrame(() => {
+        inner.style.transition = "";
+        shifting = false;
+      });
+    }
+
+    function updateClasses() {
+      items.forEach((it, i) => {
+        it.classList.remove("prev","active","next");
+        if (i === 0)                 it.classList.add("active");
+        else if (i === 1)            it.classList.add("next");
+        else if (i === items.length-1) it.classList.add("prev");
+      });
+    }
+
+    // inicia
+    updateClasses();
+    setInterval(slideUp, 4000);
+  });
+</script>
+
+<script>
+  // delega todos os cliques dentro da sidebar
+  document.querySelector('.sidebar-left').addEventListener('click', e => {
+    const item = e.target.closest('li.menu-item');
+    if (!item) return;           // só nos itens de menu
+    e.preventDefault();          // cancela o href="#"
+
+    // pega o texto do botão (Jogar, Conta, Wiki, Config)
+    const label = item.querySelector('.menu-text').textContent.trim();
+    console.log('[delegate] clicou em', label);
+
+    // navegação simples
+    switch(label) {
+      case 'Jogar':
+        // aqui você já pode chamar window.windowControls.launchGame() ou algo assim
+        break;
+      case 'Conta':
+        window.windowControls.navigate('account.html');
+        break;
+      case 'Wiki':
+        window.windowControls.navigate('wiki.html');
+        break;
+      case 'Configurações':
+        window.windowControls.navigate('settings.html');
+        break;
+    }
+  });
+</script>
 
 
-<script src="launcher.js"></script>
+
+
 </body>
-
-
-
 </html>

@@ -1,0 +1,818 @@
+/* ================================================================ */
+/* MU ONLINE LAUNCHER – Tema Tiles / Dark Neon                      */
+/* ================================================================ */
+
+:root {
+    --bg-base: #0d1117;
+    --bg-panel: #161b22;
+    --bg-panel-light: #21262d;
+    --accent-primary: #0080ff;
+    --accent-success: #00c853;
+    --accent-danger: #ff5252;
+    --text-main: #e6edf3;
+    --text-muted: #8b949e;
+    --shadow-elev: 0 4px 12px rgba(0, 0, 0, 0.55);
+    --vc-item-h: 100px;    /* altura de cada card */
+    --vc-gap: 10px;        /* espaçamento entre cards */
+    --vc-visible: 5;       /* quantos cards inteiros serão visíveis */
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    font-family: "Segoe UI", system-ui, sans-serif;
+    color: var(--text-main);
+    background: var(--bg-base);
+    overflow: hidden;
+}
+
+/* ================================================================ */
+/* Estrutura Geral                                                 */
+/* ================================================================ */
+
+.launcher-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-area {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+/* ================================================================ */
+/* Sidebar Esquerda                                                */
+/* ================================================================ */
+
+.sidebar-left {
+    width: 160px;                       /* aumentado para melhor proporção */
+    padding: 12px 8px;
+    background: var(--bg-base);
+    border-right: 1px solid var(--bg-panel-light);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.logo-box {
+    width: 100%;
+    padding: 6px 6px 14px;
+}
+
+.logo-box img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px rgba(0, 160, 255, 0.6));
+}
+
+
+/* espaço extra entre lista e bloco social */
+/* === Tiles (Jogar, Conta, Wiki, Config) ====================== */
+.menu-item{
+    margin-top: 5px;
+    flex: 0 0 auto;        /* não cresce nem encolhe automaticamente   */
+    height: 14.11vh;          /* <-- altura FINAL e visível               */
+    border-radius: 14px;
+    background: var(--bg-panel);
+    border: 2px solid var(--bg-panel-light);
+    display: flex;         /* mantém ripple, etc.                      */
+    align-items: center;   /* centraliza vertical                      */
+    justify-content: center;
+    position: relative;
+    transition: background .25s,
+    border-color .25s,
+    transform   .15s;
+}
+
+.menu-icon{font-size:28px;margin-bottom:4px;}
+.menu-text{font-size:.75rem;}
+
+/* === Bloco social em grade 2×2 ================================= */
+/* grade social: 2 colunas de largura igual, gap menor */
+.sidebar-social{
+    margin-top: 40px;
+    align-content: end;
+    display:grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas */
+    gap: 8px 10px;                          /* linha, coluna */
+    padding: 4px;                           /* reduz margem interna */
+}
+
+.social-btn{
+    width:100%;                          /* ocupa célula toda (retângulo) */
+    height: 54px;               /* um pouco mais alto */
+    border-radius: 14px;
+    font-size:0;                          /* esconde espaçamento inline‑svg */
+    display:flex;align-items:center;justify-content:center;
+}
+.social-btn svg{width:28px;height:28px;fill:currentColor;}
+.social-btn:hover{
+    background:var(--accent-primary);
+    filter:drop-shadow(0 0 6px var(--accent-primary));
+}
+.sidebar-left{
+    width: 180px;                 /* deixa os tiles e social mais folgados */
+}
+
+/* SVG ou ícone material acompanha o botão maior */
+.social-btn svg,
+.social-btn .material-icons-outlined{
+    width: 32px;
+    height: 32px;
+    font-size: 32px;
+}
+
+.menu-item.active{
+    box-shadow: inset 0 0 8px rgba(0,160,255,.6),
+    0 2px 6px rgba(0,0,0,.4);
+}
+
+.carousel{
+    outline:1px solid #00afff40;
+    outline-offset:-1px;
+    border-radius:14px;
+}
+
+.progress-fill{
+    background:
+            repeating-linear-gradient(
+                    45deg,
+                    rgba(0,200,255,.35) 0 10px,
+                    rgba(0,200,255,.05) 10px 20px
+            ),
+            var(--accent-primary);
+    animation:stripe 1s linear infinite;
+}
+@keyframes stripe{
+    from{background-position:0 0}
+    to  {background-position:40px 0}
+}
+
+
+.nav-arrow{
+    backdrop-filter:blur(4px);
+    border-radius:50%;
+    padding:10px;
+    font-size:0;                       /* some o &lt; br > */
+}
+.nav-arrow:hover{
+    box-shadow:0 0 6px var(--accent-primary);
+}
+
+.menu-item.active::before{
+    content:"";
+    position:absolute;
+    left:-4px; top:6px; bottom:6px;
+    width:3px;
+    border-radius:2px;
+    background:var(--accent-primary);
+    box-shadow:0 0 6px var(--accent-primary);
+}
+
+.menu-item.active,
+.menu-item:hover {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    transform: translateY(-2px);
+}
+
+.menu-link {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.menu-icon {
+    font-size: 32px;                    /* reduzido para melhor proporção */
+    margin-bottom: 4px;
+}
+
+.menu-text {
+    font-size: 0.8rem;
+}
+
+/* Ripple on click */
+.menu-item:active::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: inherit;
+    animation: ripple 0.4s ease;
+}
+
+@keyframes ripple {
+    0%   { opacity: 0.9; }
+    100% { opacity: 0; }
+}
+
+/* ================================================================ */
+/* Social Icons                                                   */
+/* ================================================================ */
+
+
+.social-btn {
+    width: 100%;
+    height: 56px;          /* um pouco mais alto/largo         */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: var(--bg-panel);
+    border: 2px solid var(--bg-panel-light);
+    color: var(--text-main);
+    position: relative;
+    transition: background 0.25s, transform 0.15s;
+}
+
+.social-btn:hover {
+    background: var(--accent-primary);
+    transform: translateY(-2px) scale(1.05);
+}
+
+/* Tooltip */
+.social-btn[data-tip]:hover::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: var(--text-main);
+    font-size: 0.7rem;
+    padding: 4px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+/* ================================================================ */
+/* Carrossel Central                                              */
+/* ================================================================ */
+
+.main-content {
+    flex: 1;
+    padding: 20px 24px;
+    overflow: hidden;
+}
+
+.carousel {
+    position: relative;
+    height: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow-elev);
+}
+
+.carousel-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: scale(1.03);
+    transition: opacity 0.6s ease,
+    transform 0.8s ease;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel-caption {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    padding: 20px 24px;
+    background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.75) 0%,
+            rgba(0, 0, 0, 0) 80%
+    );
+}
+
+.slide-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.slide-description {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+/* Carousel Arrows */
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.35);
+    border: none;
+    color: #fff;
+    font-size: 28px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.carousel:hover .nav-arrow {
+    opacity: 1;
+}
+
+.prev { left: 12px; }
+.next { right: 12px; }
+
+/* Carousel Dots */
+.carousel-dots {
+    position: absolute;
+    bottom: 14px;
+    right: 18px;
+    display: flex;
+    gap: 6px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.dot.active,
+.dot:hover {
+    background: var(--accent-primary);
+}
+
+/* ================================================================ */
+/* Sidebar Direita                                                */
+/* ================================================================ */
+
+.sidebar-right {
+    width: 270px;
+    padding: 20px 16px;
+    background: var(--bg-base);
+    border-left: 1px solid var(--bg-panel-light);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.panel-box {
+    background: var(--bg-panel);
+    border: 1px solid var(--bg-panel-light);
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: var(--shadow-elev);
+}
+
+.server-status-title,
+.events-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.server-state {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+}
+
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.status-indicator.online {
+    background: var(--accent-success);
+}
+
+.status-indicator.offline {
+    background: var(--accent-danger);
+}
+
+.server-players {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.events-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.86rem;
+}
+
+/* ================================================================ */
+/* Rodapé                                                         */
+/* ================================================================ */
+
+.bottom-bar {
+    z-index: 5;
+    height: 60px;
+    background: var(--bg-panel);
+    border-top: 1px solid var(--bg-panel-light);
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0 24px;
+}
+
+.play-button {
+    background: linear-gradient(90deg, #0090ff 0%, #006dff 100%);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 32px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.25s,
+    transform 0.15s;
+}
+
+.play-button:hover {
+    background: #339dff;
+    transform: translateY(-2px);
+}
+
+.play-button.loading::after {
+    content: "";
+    width: 18px;
+    height: 18px;
+    border: 3px solid transparent;
+    border-top: 3px solid #fff;
+    border-radius: 50%;
+    margin-left: 8px;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.update-progress {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    max-width: 320px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--bg-panel-light);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--accent-primary);
+    width: 0%;
+    transition: width 0.3s linear;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.game-version {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* ================================================================ */
+/* Scrollbars (opcional)                                           */
+/* ================================================================ */
+
+.sidebar-left::-webkit-scrollbar,
+.sidebar-right::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar-left::-webkit-scrollbar-thumb,
+.sidebar-right::-webkit-scrollbar-thumb {
+    background: var(--bg-panel-light);
+    border-radius: 3px;
+}
+
+/* ================================================================ */
+/* Acessibilidade & Responsividade                                 */
+/* ================================================================ */
+
+.menu-link:focus-visible,
+.social-btn:focus-visible,
+.play-button:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+@media (max-width: 1200px) {
+    .sidebar-right {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar-left {
+        width: 100px;
+    }
+    .menu-text {
+        font-size: 0.65rem;
+    }
+    .slide-title {
+        font-size: 1.1rem;
+    }
+    .slide-description {
+        display: none;
+    }
+}
+
+/* ================================================================ */
+/* MU ONLINE LAUNCHER – Tema Tiles / Dark Neon                      */
+/* ================================================================ */
+
+:root {
+    --bg-base: #0d1117;
+    --bg-panel: #161b22;
+    --bg-panel-light: #21262d;
+    --accent-primary: #0080ff;
+    --accent-success: #00c853;
+    --accent-danger: #ff5252;
+    --text-main: #e6edf3;
+    --text-muted: #8b949e;
+    --shadow-elev: 0 4px 12px rgba(0, 0, 0, 0.55);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    font-family: "Segoe UI", system-ui, sans-serif;
+    color: var(--text-main);
+    background: var(--bg-base);
+    overflow: hidden;
+}
+
+/* ================================================================ */
+/* Estrutura Geral                                                 */
+/* ================================================================ */
+
+.launcher-container {
+    position: relative; /* já deve existir */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-area {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+/* ================================================================ */
+/* Sidebar Esquerda                                                */
+/* ================================================================ */
+
+.sidebar-left {
+    width: 160px;
+    padding: 12px 8px;
+    background: var(--bg-base);
+    border-right: 1px solid var(--bg-panel-light);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+/* ... (outros estilos omitidos por brevidade) ... */
+
+/* ================================================================ */
+/* Painéis informativos – glass‑blur                               */
+/* ================================================================ */
+.panel-box,
+.server-status,
+.info-header {
+    background: rgba(22, 27, 34, 0.55);
+    backdrop-filter: blur(6px);
+    border: 1px solid #00b4ff33;
+    border-radius: 14px;
+    box-shadow: 0 6px 16px #0008;
+}
+
+/* ---------- título + botões janela ----------------------------- */
+/* ========== Cabeçalho do painel direito (título + botões) ========== */
+.info-header {
+    position: relative;
+    display: flex;
+    flex-direction: column;       /* empilha controles acima do título */
+    align-items: flex-end;        /* alinha tudo à direita */
+    padding: 16px 16px 8px;       /* topo reduzido, bottom também */
+    gap: 8px;                     /* espaço entre controles e título */
+}
+
+/* container só para os botões, disposto em linha */
+.info-header .win-controls {
+    display: flex;
+    gap: 8px;
+}
+/* controles de janela (minimizar/fechar) */
+.win-controls {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    gap: 6px;
+    z-index: 10;
+}
+
+.win-controls .win-btn {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(22, 27, 34, 0.6);
+    border: 1px solid #00b4ff33;
+    border-radius: 6px;
+    color: #e6edf3;
+    cursor: pointer;
+    transition: background .2s;
+}
+
+.win-controls .win-btn:hover {
+    background: #ffffff0d;
+}
+
+.win-controls .win-btn.close:hover {
+    background: #e81123;
+}
+
+/* troca o texto — por ícone */
+.win-controls .win-btn.mini .material-icons-outlined,
+.win-controls .win-btn.close .material-icons-outlined {
+    font-size: 18px;
+    line-height: 1;
+}
+
+
+/* título deslocado pra baixo */
+.info-header h2 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: .4px;
+    align-self: flex-start;      /* se preferir título à esquerda */
+}
+
+/* ========== Botões de janela (“tiles”) ========== */
+.win-btn {
+    width: 40px;                  /* + largura */
+    height: 40px;                 /* + altura */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-panel);
+    border: 2px solid var(--bg-panel-light);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background .2s, transform .15s;
+    font-size: 0;                 /* esconde texto “–” ou “×” nativo */
+}
+
+.win-btn span.material-icons-outlined {
+    font-size: 20px;
+    color: var(--text-main);
+}
+
+/* hover genérico */
+.win-btn:hover {
+    background: var(--accent-primary);
+    transform: translateY(-2px) scale(1.05);
+}
+
+/* minimizar à esquerda do fechar */
+.win-btn.minimize {
+    /* sem precisar de right absoluto agora */
+}
+.win-btn.close:hover {
+    background: var(--accent-danger);
+}
+
+/* ================================================================ */
+/* Ferris Wheel Carousel (roda‑gigante 3D)                         */
+/* ================================================================ */
+/* container fixo, esconde overflow */
+.vertical-carousel {
+    height: calc(
+            var(--vc-visible) * var(--vc-item-h)
+            + (var(--vc-visible) - 1) * var(--vc-gap)
+    );
+    overflow: hidden;
+    margin: 12px 0;
+}
+.vc-inner {
+    display: flex;
+    flex-direction: column;
+}
+.vc-item {
+    flex: 0 0 auto;
+    height: var(--vc-item-h);
+    margin-bottom: var(--vc-gap);
+    padding: 12px;
+    box-sizing: border-box;
+    background: var(--bg-panel);
+    border: 1px solid var(--bg-panel-light);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    opacity: 0.6;
+    transform: scale(0.95);
+    transition: transform 0.3s, opacity 0.3s;
+}
+.vc-item.active {
+    opacity: 1;
+    transform: scale(1);
+}
+.vc-item.prev,
+.vc-item.next {
+    opacity: 0.8;
+    transform: scale(0.98);
+}
+
+/* ———————————————————————————————————————————— */
+/*  Reposiciona o painel para usar todo o espaço  */
+/* ———————————————————————————————————————————— */
+.sidebar-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;  /* empurra status para baixo */
+    padding-top: 40px;
+}
+
+.win-btn:hover {
+    background: var(--accent-primary);
+    transform: translateY(-2px) scale(1.05);
+}
+
+.win-btn span.material-icons-outlined {
+    font-size: 20px;
+    color: var(--text-main);
+}
+
+/* Posicionamento */
+.win-btn.minimize {
+    right: 64px;  /* afasta do close */
+}
+.win-btn.close {
+    right: 16px;
+}
+.win-btn.close:hover {
+    background: var(--accent-danger);
+}

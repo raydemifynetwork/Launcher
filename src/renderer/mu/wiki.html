@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mu Online Launcher – Wiki</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="wiki.css" />
+    <link rel="stylesheet" href="launcher.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+</head>
+<body>
+<div class="launcher-container">
+    <div class="main-area">
+        <!-- === SIDEBAR ESQUERDA =================================== -->
+        <nav class="sidebar-left">
+            <div class="logo-box">
+                <img src="../../assets/MuLogo.png" alt="MU RFN Logo" />
+            </div>
+            <ul class="menu-list">
+                <li class="menu-item"><a href="#" class="menu-link"><span class="material-icons-outlined">play_arrow</span><span class="menu-text">Jogar</span></a></li>
+                <li class="menu-item"><a href="#" class="menu-link"><span class="material-icons-outlined">person</span><span class="menu-text">Conta</span></a></li>
+                <li class="menu-item active"><a href="#" class="menu-link"><span class="material-icons-outlined">menu_book</span><span class="menu-text">Wiki</span></a></li>
+                <li class="menu-item"><a href="#" class="menu-link"><span class="material-icons-outlined">settings</span><span class="menu-text">Configurações</span></a></li>
+            </ul>
+        </nav>
+
+        <!-- === ÁREA DE ABAS + CONTEÚDO ============================= -->
+        <main class="main-content">
+            <div class="wiki-tabs" id="tab-bar"></div>
+            <div class="wiki-view" id="tab-contents"></div>
+        </main>
+
+        <!-- === SIDEBAR DIREITA: CATEGORIAS ========================= -->
+        <aside class="sidebar-right">
+            <div class="panel-box">
+                <h3>Categoria</h3>
+                <div class="wiki-cats">
+                    <div class="menu-item active"><a href="#" class="menu-link" data-category="monstros"><span class="material-icons-outlined">pest_control</span><span class="menu-text">Monstros</span></a></div>
+                    <div class="menu-item"><a href="#" class="menu-link" data-category="quests"><span class="material-icons-outlined">map</span><span class="menu-text">Quests</span></a></div>
+                    <div class="menu-item"><a href="#" class="menu-link" data-category="receitas"><span class="material-icons-outlined">receipt_long</span><span class="menu-text">Receitas</span></a></div>
+                    <div class="menu-item"><a href="#" class="menu-link" data-category="drops"><span class="material-icons-outlined">emoji_events</span><span class="menu-text">Drops</span></a></div>
+                    <div class="menu-item"><a href="#" class="menu-link" data-category="comandos"><span class="material-icons-outlined">code</span><span class="menu-text">Comandos</span></a></div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- === RODAPÉ ============================================== -->
+    <footer class="bottom-bar">
+        <button type="button" class="play-button">Jogar</button>
+        <div class="update-progress">
+            <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+            <div class="progress-info">
+                <span class="status-text">Atualizando…</span>
+                <span class="speed-text">0 KB/s</span>
+                <span class="percent-text">0%</span>
+            </div>
+        </div>
+        <div class="game-version">
+            Versão instalada: <span class="version-number">1.0.0</span>
+        </div>
+    </footer>
+</div>
+
+<!-- SCRIPTS -->
+<script src="wiki.js"></script>
+<!-- futuras páginas -->
+<script type="module" src="pages/monstros.js"></script>
+<script type="module" src="pages/items.js"></script>
+<script type="module" src="pages/receitas.js"></script>
+<script type="module" src="pages/quests.js"></script>
+<script type="module" src="pages/comandos.js"></script>
+</body>
+</html>

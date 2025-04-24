@@ -1,7 +1,7 @@
 const { app, BrowserWindow, ipcMain, screen } = require('electron');
 const path = require('path');
 const GameManager = require('./gameManager');
-
+const { globalShortcut } = require('electron');
 let mainWindow;
 
 function createWindow () {
@@ -21,6 +21,9 @@ function createWindow () {
   });
 
   mainWindow.loadFile(path.join(__dirname, '../renderer/index.html'));
+  if (!app.isPackaged) {               // NODE_ENV !== 'production'
+    mainWindow.webContents.openDevTools({ mode: 'detach' });
+  }
   mainWindow.once('ready-to-show', () => mainWindow.show());
 }
 
@@ -38,6 +41,12 @@ app.on('activate', () => {
 /* IPC ----------------------------------------------------------------- */
 const gm = new GameManager();
 
+ipcMain.on('navigate', (event, page) => {
+  console.log('[main] navigate pedido para:', page)
+  const full = path.join(__dirname, '../renderer/mu/', page)
+  mainWindow.loadFile(full)
+})
+
 ipcMain.handle('plugins:list', ()      => gm.list());
 ipcMain.handle('game:install', (_, id) => gm.install(id));
 ipcMain.handle('game:update',  (_, id) => gm.update(id));
@@ -51,3 +60,10 @@ ipcMain.on('window:close', () => {
   if (mainWindow) mainWindow.close();
 });
 
+app.whenReady().then(() => {
+  createWindow();
+});
+
+app.on('will-quit', () => {
+  globalShortcut.unregisterAll();
+});

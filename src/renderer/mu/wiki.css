@@ -1,0 +1,124 @@
+/* wiki.css */
+
+/* --------------------------------------------------------------- */
+/* Usa todas as variáveis já definidas em launcher.css            */
+/* --------------------------------------------------------------- */
+
+/* =============== Área Central (onde antes ficava o slide) ======= */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-panel);
+    border: 1px solid var(--bg-panel-light);
+    border-radius: 14px;
+    box-shadow: var(--shadow-elev);
+    padding: 24px;
+    gap: 16px;
+    overflow: auto;
+}
+
+/* =============== Sistema de Abas no topo ======================== */
+.wiki-tabs {
+    display: flex;
+    gap: 12px;
+    border-bottom: 1px solid var(--bg-panel-light);
+    margin-bottom: 16px;
+}
+.wiki-tab {
+    padding: 8px 20px;
+    background: var(--bg-base);
+    border: 1px solid var(--bg-panel-light);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background .2s, color .2s;
+}
+.wiki-tab:hover {
+    background: var(--bg-panel-light);
+}
+.wiki-tab.active {
+    background: var(--bg-panel);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+/* =============== Conteúdo de cada Aba ========================== */
+.wiki-content {
+    flex: 1;
+    background: var(--bg-panel-light);
+    border-radius: 0 0 14px 14px;
+    padding: 16px;
+    color: var(--text-main);
+    overflow: auto;
+}
+.wiki-content h3 {
+    margin-top: 0;
+    color: var(--accent-primary);
+}
+
+/* =============== Sidebar-direita: categorias ==================== */
+.sidebar-right .panel-box {
+    padding: 16px;
+}
+.wiki-cats {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.wiki-cats button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--bg-panel);
+    border: 1px solid var(--bg-panel-light);
+    border-radius: 8px;
+    text-align: left;
+    cursor: pointer;
+    transition: background .2s, border-color .2s, color .2s;
+    color: var(--text-main);
+    font-size: 15px;
+    font-weight: 500;
+}
+.wiki-cats button:hover {
+    background: var(--bg-panel-light);
+}
+.wiki-cats button.active {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: #fff;
+}
+
+.wiki-cats .material-icons-outlined {
+    font-size: 20px;
+}
+
+/* =============== Scrollbars customizadas ======================= */
+.main-content::-webkit-scrollbar,
+.wiki-content::-webkit-scrollbar {
+    width: 6px;
+}
+.main-content::-webkit-scrollbar-thumb,
+.wiki-content::-webkit-scrollbar-thumb {
+    background: var(--bg-panel-light);
+    border-radius: 3px;
+}
+
+.wiki-tab {
+    position: relative;
+    padding-right: 26px;
+}
+
+.wiki-tab .close-tab {
+    position: absolute;
+    right: 6px;
+    top: 4px;
+    color: #aaa;
+    font-size: 14px;
+    cursor: pointer;
+}
+.wiki-tab .close-tab:hover {
+    color: red;
+}

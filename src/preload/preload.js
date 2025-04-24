@@ -1,4 +1,7 @@
+console.log('[preload] carregado');
+
 const { contextBridge, ipcRenderer } = require('electron');
+
 
 contextBridge.exposeInMainWorld('launcherAPI', {
   listPlugins: ()      => ipcRenderer.invoke('plugins:list'),
@@ -9,6 +12,7 @@ contextBridge.exposeInMainWorld('launcherAPI', {
 
 // expose: controles da janela (framelss)
 contextBridge.exposeInMainWorld('windowControls', {
-  minimize: () => ipcRenderer.send('window:minimize'),
-  close:    () => ipcRenderer.send('window:close'),
-});
+  minimize: ()      => ipcRenderer.send('window:minimize'),
+  close:     ()     => ipcRenderer.send('window:close'),
+  navigate: page => ipcRenderer.send('navigate', page)
+})

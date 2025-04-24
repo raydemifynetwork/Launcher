@@ -140,3 +140,18 @@ hero.addEventListener('mousemove', (e) => {
 hero.addEventListener('mouseleave', () => {
   hero.querySelector('img').style.transform = 'scale(1.05) translate(0,0)';
 });
+
+let idx = 0;
+const slides = document.querySelectorAll(".carousel-slide");
+const dots = document.querySelectorAll(".dot");
+function show(i) {
+  slides.forEach((s, j) => s.classList.toggle("active", i === j));
+  dots.forEach((d, j) => d.classList.toggle("active", i === j));
+  idx = i;
+}
+document.querySelector(".next").onclick = () =>
+    show((idx + 1) % slides.length);
+document.querySelector(".prev").onclick = () =>
+    show((idx - 1 + slides.length) % slides.length);
+dots.forEach((d, i) => (d.onclick = () => show(i)));
+setInterval(() => show((idx + 1) % slides.length), 8000);
